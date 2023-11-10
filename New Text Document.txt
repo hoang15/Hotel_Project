@@ -1,0 +1,4 @@
+vào file BE trong vscodde chạy terminal ./pocketbase serve
+vao file FE-Admin bat terminal chay npm i. sau do chay npm run dev de chay serve
+tai khoan pocketbase: uongvanhung199x@gmail.com  \  mk: 1234567890
+tai khoan dang nhap vao admin: admin@gmail.com   \ mk: 12345678
