@@ -117,7 +117,11 @@ const BookingInformation = () => {
               });
               return (
                 <Col key={information.id}>
-                  <Card bg="success" text="white" className="mb-5">
+                  <Card
+                    bg={information.isAgree === true ? "success" : "warning"}
+                    text="white"
+                    className="mb-5"
+                  >
                     <Card.Body>
                       <Card.Title>
                         Kind Of Room: {information.expand.rooms.kindOfRoom}
@@ -133,6 +137,15 @@ const BookingInformation = () => {
                         <div style={{ marginTop: "8px" }}>
                           Check out time: {formattedCheckOutDate}
                         </div>
+                        {information.isAgree === true ? (
+                          <div style={{ marginTop: "8px" }}>
+                            You have been approved by the admin
+                          </div>
+                        ) : (
+                          <div style={{ marginTop: "8px" }}>
+                            You have not been approved by the admin{" "}
+                          </div>
+                        )}
                       </Card.Text>
                     </Card.Body>
                   </Card>

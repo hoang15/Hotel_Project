@@ -4,7 +4,7 @@ import SideBar from "../../component/SideBar";
 import homeStyle from "../../css/home.module.css";
 import imgProfile from "../../assets/img_avatar.png";
 import useUserInfo from "../../hooks/useUserInfo";
-import { Table } from "antd";
+import { Button, Table } from "antd";
 
 const Booking = () => {
   const [booking, setBooking] = useState([]);
@@ -33,7 +33,41 @@ const Booking = () => {
       title: "Check Out Time",
       dataIndex: "checkOutTime",
     },
+    {
+      key: "isAgree",
+      title: "Agree",
+      dataIndex: "isAgree",
+      render: (value, record) => {
+        if (value === false) {
+          return (
+            <Button type="primary" block onClick={() => handleAgree(record.id)}>
+              Agree
+            </Button>
+          );
+        } else {
+          return (
+            <Button disabled block>
+              Agreed
+            </Button>
+          );
+        }
+      },
+    },
   ]);
+  const handleAgree = async (bookingId) => {
+    try {
+      await bookingService.update(bookingId, { isAgree: true });
+      setBooking((prevBookings) =>
+        prevBookings.map((bookingItem) =>
+          bookingItem.id === bookingId
+            ? { ...bookingItem, isAgree: true }
+            : bookingItem
+        )
+      );
+    } catch (error) {
+      console.error("Error updating database:", error);
+    }
+  };
   useEffect(() => {
     async function fetchData() {
       try {
